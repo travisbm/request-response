@@ -1,4 +1,6 @@
 require_relative '../db/setup'
+require_relative '../lib/user'
+
 # Remember to put the requires here for all the classes you write and want to use
 
 def parse_params(uri_fragments, query_param_string)
@@ -40,25 +42,27 @@ def parse(raw_request)
   }
 end
 
-system('clear')
-loop do
-  print "Supply a valid HTTP Request URL (h for help, q to quit) > "
-  raw_request = gets.chomp
+# system('clear')
+# loop do
+#   print "Supply a valid HTTP Request URL (h for help, q to quit) > "
+#   raw_request = gets.chomp
 
-  case raw_request
-  when 'q' then puts "Goodbye!"; exit
-  when 'h'
-    puts "A valid HTTP Request looks like:"
-    puts "\t'GET http://localhost:3000/students HTTP/1.1'"
-    puts "Read more at : http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html"
-  else
-    @request = parse(raw_request)
-    @params  = @request[:params]
-    # Use the @request and @params ivars to full the request and
-    # return an appropriate response
+#   case raw_request
+#   when 'q' then puts "Goodbye!"; exit
+#   when 'h'
+#     puts "A valid HTTP Request looks like:"
+#     puts "\t'GET http://localhost:3000/students HTTP/1.1'"
+#     puts "Read more at : http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html"
+#   else
+#     @request = parse(raw_request)
+#     @params  = @request[:params]
+#     # Use the @request and @params ivars to full the request and
+#     # return an appropriate response
 
-    # YOUR CODE GOES BELOW HERE
+#     # YOUR CODE GOES BELOW HERE
 
-    # YOUR CODE GOES ABOVE HERE  ^
-  end
-end
+
+
+#     # YOUR CODE GOES ABOVE HERE  ^
+#   end
+# end
