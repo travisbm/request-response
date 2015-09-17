@@ -42,27 +42,35 @@ def parse(raw_request)
   }
 end
 
-# system('clear')
-# loop do
-#   print "Supply a valid HTTP Request URL (h for help, q to quit) > "
-#   raw_request = gets.chomp
+system('clear')
+loop do
+  print "Supply a valid HTTP Request URL (h for help, q to quit) > "
+  raw_request = gets.chomp
 
-#   case raw_request
-#   when 'q' then puts "Goodbye!"; exit
-#   when 'h'
-#     puts "A valid HTTP Request looks like:"
-#     puts "\t'GET http://localhost:3000/students HTTP/1.1'"
-#     puts "Read more at : http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html"
-#   else
-#     @request = parse(raw_request)
-#     @params  = @request[:params]
-#     # Use the @request and @params ivars to full the request and
-#     # return an appropriate response
+  case raw_request
+  when 'q' then puts "Goodbye!"; exit
+  when 'h'
+    puts "A valid HTTP Request looks like:"
+    puts "\t'GET http://localhost:3000/students HTTP/1.1'"
+    puts "Read more at : http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html"
+  else
+    @request = parse(raw_request)
+    @params  = @request[:params]
+    # Use the @request and @params ivars to full the request and
+    # return an appropriate response
 
-#     # YOUR CODE GOES BELOW HERE
-
-
-
-#     # YOUR CODE GOES ABOVE HERE  ^
-#   end
-# end
+    # YOUR CODE GOES BELOW HERE
+    if @params[:resource] == "users" && @params[:id].nil?
+      User.all.each do |n|
+        puts n.full_name
+      end
+    elsif @params[:resource] == "users" && @params[:id]
+      begin
+        puts "#{User.find(@params[:id]).full_name}"
+      rescue ActiveRecord::RecordNotFound
+        puts "Record not found!"
+      end
+    end
+    # YOUR CODE GOES ABOVE HERE  ^
+  end
+end
